@@ -1,0 +1,12 @@
+# Virtual environment - not needed yet, but ignored in advance
+.venv/
+
+# Secrets
+.env
+
+# Python's generated cache files
+__pycache__/
+*.pyc
+
+# The saved to-do list is personal data, not code
+tasks.json
