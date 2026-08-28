@@ -25,3 +25,11 @@ for number in numbers:
 
 print(colours[-1])
 
+print("\n")
+
+
+def no_return():
+    print("I print but return nothing")
+
+value = no_return()
+print(value)
