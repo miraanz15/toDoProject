@@ -1,8 +1,22 @@
-tasks = [
-    {"text": "Buy milk", "done": False},
-    {"text": "Call mum", "done": False},
-    {"text": "Finish Python lesson", "done": False},
-]
+import json
+import os
+
+TASKS_FILE = "tasks.json"
+
+def load_tasks():
+    if not os.path.exists(TASKS_FILE):
+        return []
+    with open(TASKS_FILE, "r") as f:
+        return json.load(f)
+
+
+def save_tasks():
+    with open(TASKS_FILE, "w") as f:
+        json.dump(tasks, f, indent=2)
+
+
+tasks = load_tasks()
+
 
 
 def show_tasks():
@@ -26,6 +40,8 @@ def add_task(text):
             return
     tasks.append({"text": text, "done": False})
     print(f"Added: {text}")
+    save_tasks()
+
 
 
 def remove_task_at(pos):
@@ -35,6 +51,7 @@ def remove_task_at(pos):
         return
     removed = tasks.pop(index)
     print(f"Removed: {removed['text']}")
+    save_tasks()
 
 
 def mark_done(pos):
@@ -44,6 +61,7 @@ def mark_done(pos):
         return
     tasks[index]["done"] = True
     print(f"Marked done: {tasks[index]['text']}")
+    save_tasks()
 
 
 def show_menu():
