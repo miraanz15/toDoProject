@@ -1,18 +1,27 @@
 import json
-import os
 
 TASKS_FILE = "tasks.json"
 
-def load_tasks():
-    if not os.path.exists(TASKS_FILE):
-        return []
-    with open(TASKS_FILE, "r") as f:
-        return json.load(f)
 
+def load_tasks():
+    try:
+        with open(TASKS_FILE, "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        print("Warning: tasks.json is damaged. Starting with an empty list.")
+        return []
+      
 
 def save_tasks():
-    with open(TASKS_FILE, "w") as f:
-        json.dump(tasks, f, indent=2)
+    try:
+        with open(TASKS_FILE, "w") as f:
+                json.dump(tasks, f, indent=2)
+    except OSError as e:
+        print(f"Could not save tasks: {e}")            
+
+    
 
 
 tasks = load_tasks()

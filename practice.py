@@ -1,35 +1,27 @@
-colours = ["red", "green", "blue", "yellow", "white"]
+import json
+import os
 
-print(colours[2])
-print(colours[4])
-print(f"Total colours: {len(colours)}")
+# Drill 1 - Python to JSON text and back
+data = [{"name": "Miraan", "learning": True}]
+text = json.dumps(data)
+print(text)
+print(type(text))
 
-colours.append("black")
-print(f'Colour removed: {colours.remove("green")}')
-colours.pop(0)
-colours.insert(2, "orange")
-print(f"Colours = {colours}")
+back = json.loads(text)
+print(back)
+print(type(back))
 
-for colour in colours:
-    print(f"\n {colour}")
+# Drill 2 - writing to a file
+with open("drill.json", "w") as f:
+    json.dump(data, f, indent=2)
+print("written")
 
-print("")
+# Drill 3 - reading it back
+with open("drill.json", "r") as f:
+    loaded = json.load(f)
+print(loaded)
+print(loaded[0]["name"])
 
-for number, colour in enumerate(colours, start = 1):
-    print(f"{number}. {colour}")
-
-numbers = [10,20,30,40,50]
-
-for number in numbers:
-    print(number)
-
-print(colours[-1])
-
-print("\n")
-
-
-def no_return():
-    print("I print but return nothing")
-
-value = no_return()
-print(value)
+# Drill 4 - checking a file exists
+print(os.path.exists("drill.json"))
+print(os.path.exists("nothing_here.json"))

@@ -10,3 +10,4 @@ __pycache__/
 
 # The saved to-do list is personal data, not code
 tasks.json
+drill.json
